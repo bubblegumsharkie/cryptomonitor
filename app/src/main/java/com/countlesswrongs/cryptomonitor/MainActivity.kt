@@ -3,7 +3,7 @@ package com.countlesswrongs.cryptomonitor
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.countlesswrongs.cryptomonitor.model.api.ApiFactory
+import com.countlesswrongs.cryptomonitor.api.ApiFactory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers

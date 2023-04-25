@@ -1,4 +1,4 @@
-package com.countlesswrongs.cryptomonitor.model.api
+package com.countlesswrongs.cryptomonitor.api
 
 import Secret
 import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfoRawData
