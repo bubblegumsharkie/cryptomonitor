@@ -40,7 +40,7 @@ data class CoinPriceInfo(
 
     @SerializedName("LASTUPDATE")
     @Expose
-    val lastUpdate: Int? = null,
+    val lastUpdate: Long? = null,
 
     @SerializedName("MEDIAN")
     @Expose
