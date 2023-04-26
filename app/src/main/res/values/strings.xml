@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">cryptomonitor</string>
+    <string name="cd_coin_logo">Coin Logo</string>
 </resources>
