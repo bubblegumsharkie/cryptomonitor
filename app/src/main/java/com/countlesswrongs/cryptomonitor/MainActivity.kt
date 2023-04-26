@@ -15,10 +15,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
-        viewModel.loadData()
-        viewModel.priceList.observe(this) {
-            Log.d("TEST_DATA", "Succ in Activity: $it")
+        viewModel.getDetailedInfo("BTC").observe(this) {
+            Log.d("TEST_DATA_LOADING", it.toString())
         }
+//        viewModel.priceList.observe(this) {
+//            Log.d("TEST_DATA", "Succ in Activity: $it")
+//        }
     }
 
 

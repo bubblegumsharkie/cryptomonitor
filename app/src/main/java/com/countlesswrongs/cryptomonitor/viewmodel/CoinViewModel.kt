@@ -3,6 +3,7 @@ package com.countlesswrongs.cryptomonitor.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.countlesswrongs.cryptomonitor.api.ApiFactory
 import com.countlesswrongs.cryptomonitor.database.AppDatabase
 import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
@@ -10,6 +11,7 @@ import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfoRaw
 import com.google.gson.Gson
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -18,9 +20,16 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     val priceList = db.coinPriceInfoDao().getPriceList()
 
-    fun loadData() {
+    fun getDetailedInfo(fSym: String): LiveData<CoinPriceInfo> {
+        return db.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
+    }
+
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
         val disposable = ApiFactory.apiService.getTopCoinsInfo()
-            .subscribeOn(Schedulers.io())
             .map { coinInfoListOfData ->
                 coinInfoListOfData.data?.map {
                     it.coinInfo?.name
@@ -30,9 +39,12 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
                 ApiFactory.apiService.getFullPriceList(fSyms = it)
             }
             .map { getPriceListFromRawData(it) }
+            .delaySubscription(10, TimeUnit.SECONDS)
+            .repeat()
+            .retry()
+            .subscribeOn(Schedulers.io())
             .subscribe({
                 db.coinPriceInfoDao().insertPriceList(it)
-                Log.d("TEST_DATA", "Success ${it.toString()}")
             }, {
                 Log.d("TEST_DATA", "Failure ${it.message.toString()}")
             })
