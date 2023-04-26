@@ -7,6 +7,6 @@ data class CoinInfoListOfData(
 
     @SerializedName("Data")
     @Expose
-    val data: List<Datum>
+    val data: List<Datum>?
 
 )
