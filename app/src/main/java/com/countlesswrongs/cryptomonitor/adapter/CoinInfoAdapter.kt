@@ -1,5 +1,6 @@
 package com.countlesswrongs.cryptomonitor.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +12,15 @@ import com.countlesswrongs.cryptomonitor.R
 import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
 import com.squareup.picasso.Picasso
 
-class CoinInfoAdapter : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
+class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
     var coinInfoList: List<CoinPriceInfo> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    var onCoinClickListener: OnCoinClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val view = LayoutInflater
@@ -30,11 +33,18 @@ class CoinInfoAdapter : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
         val coin = coinInfoList[position]
 
         with(holder) {
-            textViewSymbols.text = coin.fromSymbol + " / " + coin.toSymbol
+            val symbolsTemplate = context.resources.getString(R.string.symbols_template)
+            val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
+            textViewSymbols.text = String.format(symbolsTemplate, coin.fromSymbol, coin.toSymbol)
             textViewPrice.text = coin.price.toString()
-            textViewLastUpdate.text = coin.getFormattedTime()
+            textViewLastUpdate.text = String.format(lastUpdateTemplate, coin.getFormattedTime())
             Picasso.get().load(coin.getFullImageUrl()).into(imageViewLogoCoin)
+
+            itemView.setOnClickListener {
+                onCoinClickListener?.onCoinClick(coin)
+            }
         }
+
     }
 
     override fun getItemCount() = coinInfoList.size
@@ -52,4 +62,9 @@ class CoinInfoAdapter : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
             textViewLastUpdate = itemView.findViewById(R.id.textViewLastUpdate)
         }
     }
+
+    interface OnCoinClickListener {
+        fun onCoinClick(coinPriceInfo: CoinPriceInfo)
+    }
+
 }
