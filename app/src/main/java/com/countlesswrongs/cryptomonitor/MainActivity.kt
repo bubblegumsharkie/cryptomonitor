@@ -3,32 +3,23 @@ package com.countlesswrongs.cryptomonitor
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.countlesswrongs.cryptomonitor.api.ApiFactory
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import androidx.lifecycle.ViewModelProvider
+import com.countlesswrongs.cryptomonitor.viewmodel.CoinViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private var compositeDisposable = CompositeDisposable()
+    private lateinit var viewModel: CoinViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val subscribe = ApiFactory.apiService.getFullPriceList(fSyms = "BTC,ETH,EOS")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.d("TEST_DATA", it.toString())
-            }, {
-                Log.d("TEST_DATA", it.message.toString())
-            })
-        compositeDisposable.add(subscribe)
+        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+
+        viewModel.loadData()
+        viewModel.priceList.observe(this) {
+            Log.d("TEST_DATA", "Succ in Activity: $it")
+        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
-    }
 
 }
