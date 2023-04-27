@@ -3,4 +3,10 @@
     <string name="cd_coin_logo">Coin Logo</string>
     <string name="symbols_template">%s / %s</string>
     <string name="last_update_template">Updated at: %s</string>
+    <string name="text_slash"> / </string>
+    <string name="label_last_update">Last update:</string>
+    <string name="label_last_market">Last market:</string>
+    <string name="label_highest_price_today">Highest price today:</string>
+    <string name="label_lowest_price_today">Lowest price today:</string>
+    <string name="label_current_price">Current price:</string>
 </resources>
