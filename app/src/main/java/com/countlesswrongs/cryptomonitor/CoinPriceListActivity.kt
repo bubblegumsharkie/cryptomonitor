@@ -1,7 +1,6 @@
 package com.countlesswrongs.cryptomonitor
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -25,9 +24,10 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
-                Log.d("On_CLICK_TEST", coinPriceInfo.fromSymbol)
+                val intent = CoinDetailActivity
+                    .newIntent(this@CoinPriceListActivity, coinPriceInfo.fromSymbol)
+                startActivity(intent)
             }
-
         }
 
         viewModel.priceList.observe(this) {
