@@ -30,7 +30,6 @@ class CoinDetailActivity : AppCompatActivity() {
         initViews()
 
 
-
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
             Toast.makeText(
