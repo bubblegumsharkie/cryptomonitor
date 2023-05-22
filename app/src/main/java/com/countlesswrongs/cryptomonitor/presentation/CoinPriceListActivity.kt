@@ -51,10 +51,10 @@ class CoinPriceListActivity : AppCompatActivity() {
     }
 
     private fun launchDetailFragment(fSym: String) {
+        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_details, CoinDetailFragment.newInstance(fSym))
             .addToBackStack(null)
             .commit()
     }
-
 }
