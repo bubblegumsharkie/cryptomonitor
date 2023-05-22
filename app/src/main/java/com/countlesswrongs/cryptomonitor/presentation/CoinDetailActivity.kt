@@ -9,9 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.countlesswrongs.cryptomonitor.R
-import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
 import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
-import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
@@ -50,8 +48,8 @@ class CoinDetailActivity : AppCompatActivity() {
             textViewLowestPriceToday.text = it.lowDay.toString()
             textViewHighestPriceToday.text = it.highDay.toString()
             textViewLastMarket.text = it.lastMarket
-            textViewLastUpdate.text = convertTimestampToTime(it.lastUpdate)
-            Picasso.get().load(BASE_IMAGE_URL + it.imageUrl).into(imageViewLogo)
+            textViewLastUpdate.text = it.lastUpdate
+            Picasso.get().load(it.imageUrl).into(imageViewLogo)
         }
     }
 

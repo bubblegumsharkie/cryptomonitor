@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.countlesswrongs.cryptomonitor.R
-import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
 import com.countlesswrongs.cryptomonitor.domain.entity.CoinInfoEntity
-import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
@@ -40,8 +38,8 @@ class CoinInfoAdapter(private val context: Context) :
             val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
             textViewSymbols.text = String.format(symbolsTemplate, coin.fromSymbol, coin.toSymbol)
             textViewPrice.text = coin.price.toString()
-            textViewLastUpdate.text = String.format(lastUpdateTemplate, convertTimestampToTime(coin.lastUpdate))
-            Picasso.get().load(BASE_IMAGE_URL + coin.imageUrl).into(imageViewLogoCoin)
+            textViewLastUpdate.text = String.format(lastUpdateTemplate, coin.lastUpdate)
+            Picasso.get().load(coin.imageUrl).into(imageViewLogoCoin)
 
             itemView.setOnClickListener {
                 onCoinClickListener?.onCoinClick(coin)
