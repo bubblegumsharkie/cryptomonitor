@@ -3,7 +3,6 @@ package com.countlesswrongs.cryptomonitor.data.network.api
 import Secret
 import com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse.CoinInfoJsonContainerDto
 import com.countlesswrongs.cryptomonitor.data.network.model.listresponse.CoinNamesListDto
-import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
