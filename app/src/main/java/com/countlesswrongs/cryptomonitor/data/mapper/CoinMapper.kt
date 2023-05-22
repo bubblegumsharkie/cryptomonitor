@@ -50,10 +50,10 @@ class CoinMapper {
     fun mapDbModelToEntity(dbModel: CoinInfoDbModel) = CoinInfoEntity(
         fromSymbol = dbModel.fromSymbol,
         toSymbol = dbModel.toSymbol,
-        price = dbModel.price,
+        price = dbModel.price.toString(),
         lastUpdate = convertTimestampToTime(dbModel.lastUpdate),
-        highDay = dbModel.highDay,
-        lowDay = dbModel.lowDay,
+        highDay = dbModel.highDay.toString(),
+        lowDay = dbModel.lowDay.toString(),
         lastMarket = dbModel.lastMarket,
         imageUrl = dbModel.imageUrl
     )

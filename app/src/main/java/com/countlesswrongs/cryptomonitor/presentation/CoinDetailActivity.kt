@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.countlesswrongs.cryptomonitor.R
 import com.countlesswrongs.cryptomonitor.databinding.ActivityCoinDetailBinding
 import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
 import com.squareup.picasso.Picasso
@@ -21,7 +20,7 @@ class CoinDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coin_detail)
+        setContentView(binding.root)
 
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
@@ -38,9 +37,9 @@ class CoinDetailActivity : AppCompatActivity() {
             with(binding) {
                 textViewFromSymbol.text = it.fromSymbol
                 textViewToSymbol.text = it.toSymbol
-                textViewPrice.text = it.price.toString()
-                textViewLowestPriceToday.text = it.lowDay.toString()
-                textViewHighestPriceToday.text = it.highDay.toString()
+                textViewPrice.text = it.price
+                textViewLowestPriceToday.text = it.lowDay
+                textViewHighestPriceToday.text = it.highDay
                 textViewLastMarket.text = it.lastMarket
                 textViewLastUpdate.text = it.lastUpdate
                 Picasso.get().load(it.imageUrl).into(imageViewLogo)
