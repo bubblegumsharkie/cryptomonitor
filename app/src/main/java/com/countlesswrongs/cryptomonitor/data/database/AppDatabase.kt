@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.countlesswrongs.cryptomonitor.data.database.dao.CoinInfoDao
 import com.countlesswrongs.cryptomonitor.data.database.model.CoinInfoDbModel
 
-@Database(entities = [CoinInfoDbModel::class], version = 2, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class], version = 3, exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
     companion object {
