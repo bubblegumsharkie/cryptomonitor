@@ -23,6 +23,7 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         val adapter = CoinInfoAdapter(applicationContext)
         binding.recyclerViewCoinPriceList.adapter = adapter
+        binding.recyclerViewCoinPriceList.itemAnimator = null
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinInfoEntity: CoinInfoEntity) {
                 val intent = CoinDetailActivity.newIntent(
@@ -34,7 +35,7 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
 
         viewModel.coinInfoList.observe(this) {
-            adapter.coinInfoList = it
+            adapter.submitList(it)
         }
     }
 }
