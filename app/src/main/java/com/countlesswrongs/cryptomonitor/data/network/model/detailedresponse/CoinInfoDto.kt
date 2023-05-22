@@ -1,4 +1,4 @@
-package com.countlesswrongs.cryptomonitor.data.model.detailedresponse
+package com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 import io.reactivex.rxjava3.annotations.NonNull
 
 @Entity(tableName = "full_price_list")
-data class CoinPriceInfo(
+data class CoinInfoDto(
 
     @SerializedName("TYPE")
     @Expose

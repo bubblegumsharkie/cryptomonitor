@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.countlesswrongs.cryptomonitor.R
-import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse.CoinInfoDto
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinPriceInfo> = listOf()
+    var coinInfoList: List<CoinInfoDto> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -64,7 +64,7 @@ class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.Co
     }
 
     interface OnCoinClickListener {
-        fun onCoinClick(coinPriceInfo: CoinPriceInfo)
+        fun onCoinClick(coinInfoDto: CoinInfoDto)
     }
 
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.countlesswrongs.cryptomonitor.R
 import com.countlesswrongs.cryptomonitor.presentation.adapter.CoinInfoAdapter
-import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse.CoinInfoDto
 import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
 
 class CoinPriceListActivity : AppCompatActivity() {
@@ -24,10 +24,10 @@ class CoinPriceListActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
+            override fun onCoinClick(coinInfoDto: CoinInfoDto) {
                 val intent = CoinDetailActivity.newIntent(
                     this@CoinPriceListActivity,
-                    coinPriceInfo.fromSymbol
+                    coinInfoDto.fromSymbol
                 )
                 startActivity(intent)
             }

@@ -1,8 +1,8 @@
 package com.countlesswrongs.cryptomonitor.data.network.api
 
 import Secret
-import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfoRawData
-import com.countlesswrongs.cryptomonitor.data.model.listresponse.CoinInfoListOfData
+import com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse.CoinInfoJsonContainerDto
+import com.countlesswrongs.cryptomonitor.data.network.model.listresponse.CoinNamesListDto
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,14 +14,14 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey: String = Secret.API_KEY,
         @Query(QUERY_PARAM_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_PARAM_TO_SYMBOL) tSym: String = CURRENCY
-    ): Single<CoinInfoListOfData>
+    ): Single<CoinNamesListDto>
 
     @GET("pricemultifull")
     fun getFullPriceList(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = Secret.API_KEY,
         @Query(QUERY_PARAM_FROM_SYMBOLS) fSyms: String,
         @Query(QUERY_PARAM_TO_SYMBOLS) tSyms: String = CURRENCY
-    ): Single<CoinPriceInfoRawData>
+    ): Single<CoinInfoJsonContainerDto>
 
     companion object {
         private const val QUERY_PARAM_LIMIT = "limit"
