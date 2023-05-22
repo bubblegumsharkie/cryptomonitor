@@ -8,6 +8,7 @@ import com.countlesswrongs.cryptomonitor.data.mapper.CoinMapper
 import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory
 import com.countlesswrongs.cryptomonitor.domain.entity.CoinInfoEntity
 import com.countlesswrongs.cryptomonitor.domain.repository.CoinRepository
+import kotlinx.coroutines.delay
 
 class CoinRepositoryImpl(
     private val application: Application
@@ -31,7 +32,21 @@ class CoinRepositoryImpl(
         }
     }
 
-    override fun loadData() {
-        TODO("Not yet implemented")
+    override suspend fun loadData() {
+        while (true) {
+            val topCoins = apiService.getTopCoinsInfo()
+            val fromSymbols = mapper.mapNamesListToString(topCoins)
+            val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
+            val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
+            val dbModelList = coinInfoDtoList.map {
+                mapper.mapDtoToDbModel(it)
+            }
+            coinInfoDao.insertPriceList(dbModelList)
+            delay(UPDATE_DELAY)
+        }
+    }
+
+    companion object {
+        private const val UPDATE_DELAY: Long = 10_000
     }
 }
