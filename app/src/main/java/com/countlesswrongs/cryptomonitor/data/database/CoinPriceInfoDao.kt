@@ -1,11 +1,11 @@
-package com.countlesswrongs.cryptomonitor.database
+package com.countlesswrongs.cryptomonitor.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
 
 @Dao
 interface CoinPriceInfoDao {

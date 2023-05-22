@@ -1,8 +1,8 @@
-package com.countlesswrongs.cryptomonitor.api
+package com.countlesswrongs.cryptomonitor.data.network.api
 
 import Secret
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfoRawData
-import com.countlesswrongs.cryptomonitor.model.listresponse.CoinInfoListOfData
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfoRawData
+import com.countlesswrongs.cryptomonitor.data.model.listresponse.CoinInfoListOfData
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

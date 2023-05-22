@@ -1,13 +1,13 @@
-package com.countlesswrongs.cryptomonitor.viewmodel
+package com.countlesswrongs.cryptomonitor.presentation.viewmodel
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.countlesswrongs.cryptomonitor.api.ApiFactory
-import com.countlesswrongs.cryptomonitor.database.AppDatabase
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfoRawData
+import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory
+import com.countlesswrongs.cryptomonitor.data.database.AppDatabase
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers

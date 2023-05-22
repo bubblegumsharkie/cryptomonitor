@@ -1,4 +1,4 @@
-package com.countlesswrongs.cryptomonitor.adapter
+package com.countlesswrongs.cryptomonitor.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.countlesswrongs.cryptomonitor.R
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {

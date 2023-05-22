@@ -1,4 +1,4 @@
-package com.countlesswrongs.cryptomonitor
+package com.countlesswrongs.cryptomonitor.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.countlesswrongs.cryptomonitor.viewmodel.CoinViewModel
+import com.countlesswrongs.cryptomonitor.R
+import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
 import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
@@ -28,7 +29,6 @@ class CoinDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_detail)
         initViews()
-
 
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
@@ -75,5 +75,4 @@ class CoinDetailActivity : AppCompatActivity() {
             return intent
         }
     }
-
 }

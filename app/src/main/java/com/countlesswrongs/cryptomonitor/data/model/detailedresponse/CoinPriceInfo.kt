@@ -1,8 +1,8 @@
-package com.countlesswrongs.cryptomonitor.model.detailedresponse
+package com.countlesswrongs.cryptomonitor.data.model.detailedresponse
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.countlesswrongs.cryptomonitor.api.ApiFactory.BASE_IMAGE_URL
+import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
 import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
 

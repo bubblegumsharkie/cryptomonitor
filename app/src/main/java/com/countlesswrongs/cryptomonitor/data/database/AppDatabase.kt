@@ -1,10 +1,10 @@
-package com.countlesswrongs.cryptomonitor.database
+package com.countlesswrongs.cryptomonitor.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.countlesswrongs.cryptomonitor.model.detailedresponse.CoinPriceInfo
+import com.countlesswrongs.cryptomonitor.data.model.detailedresponse.CoinPriceInfo
 
 @Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
 
