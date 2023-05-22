@@ -1,6 +1,7 @@
 package com.countlesswrongs.cryptomonitor.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.countlesswrongs.cryptomonitor.data.database.AppDatabase
@@ -34,14 +35,21 @@ class CoinRepositoryImpl(
 
     override suspend fun loadData() {
         while (true) {
-            val topCoins = apiService.getTopCoinsInfo()
-            val fromSymbols = mapper.mapNamesListToString(topCoins)
-            val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
-            val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
-            val dbModelList = coinInfoDtoList.map {
-                mapper.mapDtoToDbModel(it)
+            try {
+                val topCoins = apiService.getTopCoinsInfo()
+                val fromSymbols = mapper.mapNamesListToString(topCoins)
+                val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
+                val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
+                val dbModelList = coinInfoDtoList.map {
+                    mapper.mapDtoToDbModel(it)
+                }
+                coinInfoDao.insertPriceList(dbModelList)
+            } catch (e: Exception) {
+                Log.d(
+                    "LOAD_DATA",
+                    "There was a problem with loading data, here's the message: \n $e"
+                )
             }
-            coinInfoDao.insertPriceList(dbModelList)
             delay(UPDATE_DELAY)
         }
     }

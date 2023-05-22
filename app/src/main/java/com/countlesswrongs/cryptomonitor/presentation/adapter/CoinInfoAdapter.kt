@@ -9,12 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.countlesswrongs.cryptomonitor.R
-import com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse.CoinInfoDto
+import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
+import com.countlesswrongs.cryptomonitor.domain.entity.CoinInfoEntity
+import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
-class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
+class CoinInfoAdapter(private val context: Context) :
+    Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinInfoDto> = listOf()
+    var coinInfoList: List<CoinInfoEntity> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -37,14 +40,13 @@ class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.Co
             val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
             textViewSymbols.text = String.format(symbolsTemplate, coin.fromSymbol, coin.toSymbol)
             textViewPrice.text = coin.price.toString()
-            textViewLastUpdate.text = String.format(lastUpdateTemplate, coin.getFormattedTime())
-            Picasso.get().load(coin.getFullImageUrl()).into(imageViewLogoCoin)
+            textViewLastUpdate.text = String.format(lastUpdateTemplate, convertTimestampToTime(coin.lastUpdate))
+            Picasso.get().load(BASE_IMAGE_URL + coin.imageUrl).into(imageViewLogoCoin)
 
             itemView.setOnClickListener {
                 onCoinClickListener?.onCoinClick(coin)
             }
         }
-
     }
 
     override fun getItemCount() = coinInfoList.size
@@ -64,7 +66,7 @@ class CoinInfoAdapter(private val context: Context) : Adapter<CoinInfoAdapter.Co
     }
 
     interface OnCoinClickListener {
-        fun onCoinClick(coinInfoDto: CoinInfoDto)
+        fun onCoinClick(coinInfoEntity: CoinInfoEntity)
     }
 
 }

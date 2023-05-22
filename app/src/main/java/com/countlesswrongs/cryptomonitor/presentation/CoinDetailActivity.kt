@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.countlesswrongs.cryptomonitor.R
+import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
 import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
+import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
@@ -39,19 +41,17 @@ class CoinDetailActivity : AppCompatActivity() {
             ).show()
             return
         }
-        val fSym = intent.getStringExtra(EXTRA_FROM_SYMBOL)
+        val fSym = intent.getStringExtra(EXTRA_FROM_SYMBOL) ?: EMPTY_SYMBOL_STRING
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        if (fSym != null) {
-            viewModel.getDetailedInfo(fSym).observe(this) {
-                textViewFromSymbol.text = it.fromSymbol
-                textViewToSymbol.text = it.toSymbol
-                textViewPrice.text = it.price.toString()
-                textViewLowestPriceToday.text = it.lowDay.toString()
-                textViewHighestPriceToday.text = it.highDay.toString()
-                textViewLastMarket.text = it.lastMarket
-                textViewLastUpdate.text = it.getFormattedTime()
-                Picasso.get().load(it.getFullImageUrl()).into(imageViewLogo)
-            }
+        viewModel.getDetailedInfo(fSym).observe(this) {
+            textViewFromSymbol.text = it.fromSymbol
+            textViewToSymbol.text = it.toSymbol
+            textViewPrice.text = it.price.toString()
+            textViewLowestPriceToday.text = it.lowDay.toString()
+            textViewHighestPriceToday.text = it.highDay.toString()
+            textViewLastMarket.text = it.lastMarket
+            textViewLastUpdate.text = convertTimestampToTime(it.lastUpdate)
+            Picasso.get().load(BASE_IMAGE_URL + it.imageUrl).into(imageViewLogo)
         }
     }
 
@@ -68,6 +68,7 @@ class CoinDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_FROM_SYMBOL = "fSym"
+        private const val EMPTY_SYMBOL_STRING = ""
 
         fun newIntent(context: Context, fromSymbol: String): Intent {
             val intent = Intent(context, CoinDetailActivity::class.java)

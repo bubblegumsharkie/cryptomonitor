@@ -2,12 +2,8 @@ package com.countlesswrongs.cryptomonitor.data.network.model.detailedresponse
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory.BASE_IMAGE_URL
-import com.countlesswrongs.cryptomonitor.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
-import io.reactivex.rxjava3.annotations.NonNull
 
 @Entity(tableName = "full_price_list")
 data class CoinInfoDto(
@@ -23,7 +19,6 @@ data class CoinInfoDto(
     @PrimaryKey
     @SerializedName("FROMSYMBOL")
     @Expose
-    @NonNull
     val fromSymbol: String,
 
     @SerializedName("TOSYMBOL")
@@ -206,13 +201,4 @@ data class CoinInfoDto(
     @Expose
     val imageUrl: String? = null
 
-) {
-    fun getFormattedTime(): String {
-       return convertTimestampToTime(lastUpdate)
-    }
-
-    fun getFullImageUrl(): String {
-        return BASE_IMAGE_URL + imageUrl
-    }
-
-}
+)
