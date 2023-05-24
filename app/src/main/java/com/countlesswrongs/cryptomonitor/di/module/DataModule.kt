@@ -1,4 +1,4 @@
-package com.countlesswrongs.cryptomonitor.di
+package com.countlesswrongs.cryptomonitor.di.module
 
 import android.app.Application
 import com.countlesswrongs.cryptomonitor.data.database.AppDatabase

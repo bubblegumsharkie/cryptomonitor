@@ -1,6 +1,7 @@
-package com.countlesswrongs.cryptomonitor.di
+package com.countlesswrongs.cryptomonitor.di.component
 
 import android.app.Application
+import com.countlesswrongs.cryptomonitor.di.module.DataModule
 import dagger.BindsInstance
 import dagger.Component
 
