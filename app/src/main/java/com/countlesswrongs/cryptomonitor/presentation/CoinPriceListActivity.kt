@@ -8,19 +8,30 @@ import com.countlesswrongs.cryptomonitor.databinding.ActivityCoinPriceListBindin
 import com.countlesswrongs.cryptomonitor.domain.entity.CoinInfoEntity
 import com.countlesswrongs.cryptomonitor.presentation.adapter.CoinInfoAdapter
 import com.countlesswrongs.cryptomonitor.presentation.viewmodel.CoinViewModel
+import com.countlesswrongs.cryptomonitor.presentation.viewmodel.ViewModelFactory
+import javax.inject.Inject
 
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val binding by lazy {
         ActivityCoinPriceListBinding.inflate(layoutInflater)
     }
 
+    private val component by lazy {
+        (application as CoinApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
 
         val adapter = CoinInfoAdapter(applicationContext)
         binding.recyclerViewCoinPriceList.adapter = adapter

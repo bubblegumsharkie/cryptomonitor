@@ -1,7 +1,7 @@
 package com.countlesswrongs.cryptomonitor.presentation
 
 import android.app.Application
-import com.countlesswrongs.cryptomonitor.di.DaggerApplicationComponent
+import com.countlesswrongs.cryptomonitor.di.component.DaggerApplicationComponent
 
 class CoinApp: Application() {
 
