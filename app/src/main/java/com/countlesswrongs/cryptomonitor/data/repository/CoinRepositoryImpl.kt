@@ -5,18 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
-import com.countlesswrongs.cryptomonitor.data.database.AppDatabase
+import com.countlesswrongs.cryptomonitor.data.database.dao.CoinInfoDao
 import com.countlesswrongs.cryptomonitor.data.mapper.CoinMapper
 import com.countlesswrongs.cryptomonitor.data.workers.RefreshDataWorker
 import com.countlesswrongs.cryptomonitor.domain.entity.CoinInfoEntity
 import com.countlesswrongs.cryptomonitor.domain.repository.CoinRepository
+import javax.inject.Inject
 
-class CoinRepositoryImpl(
-    private val application: Application
+class CoinRepositoryImpl @Inject constructor(
+    private val application: Application,
+    private val coinInfoDao: CoinInfoDao,
+    private val mapper: CoinMapper
 ) : CoinRepository {
 
-    private val coinInfoDao = AppDatabase.getInstance(application).coinPriceInfoDao()
-    private val mapper = CoinMapper()
 
     override fun getCoinInfoList(): LiveData<List<CoinInfoEntity>> {
         return coinInfoDao.getPriceList().map { modelList ->
