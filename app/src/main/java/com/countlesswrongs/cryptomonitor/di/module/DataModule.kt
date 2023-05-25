@@ -6,6 +6,7 @@ import com.countlesswrongs.cryptomonitor.data.database.dao.CoinInfoDao
 import com.countlesswrongs.cryptomonitor.data.network.api.ApiFactory
 import com.countlesswrongs.cryptomonitor.data.network.api.ApiService
 import com.countlesswrongs.cryptomonitor.data.repository.CoinRepositoryImpl
+import com.countlesswrongs.cryptomonitor.di.scope.ApplicationScope
 import com.countlesswrongs.cryptomonitor.domain.repository.CoinRepository
 import dagger.Binds
 import dagger.Module
@@ -15,11 +16,13 @@ import dagger.Provides
 interface DataModule {
 
     @Binds
+    @ApplicationScope
     fun bindCoinRepository(impl: CoinRepositoryImpl): CoinRepository
 
     companion object {
 
         @Provides
+        @ApplicationScope
         fun provideCoinInfoDao(
             application: Application
         ): CoinInfoDao {
@@ -27,6 +30,7 @@ interface DataModule {
         }
 
         @Provides
+        @ApplicationScope
         fun provideApiService(): ApiService {
             return ApiFactory.apiService
         }
