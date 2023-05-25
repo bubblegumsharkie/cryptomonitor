@@ -7,8 +7,9 @@ import androidx.work.WorkerParameters
 import com.countlesswrongs.cryptomonitor.data.database.dao.CoinInfoDao
 import com.countlesswrongs.cryptomonitor.data.mapper.CoinMapper
 import com.countlesswrongs.cryptomonitor.data.network.api.ApiService
+import javax.inject.Inject
 
-class RefreshDataWorkerFactory(
+class RefreshDataWorkerFactory @Inject constructor(
     private val coinInfoDao: CoinInfoDao,
     private val apiService: ApiService,
     private val mapper: CoinMapper

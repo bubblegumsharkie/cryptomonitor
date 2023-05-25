@@ -4,6 +4,7 @@ import android.app.Application
 import com.countlesswrongs.cryptomonitor.di.module.DataModule
 import com.countlesswrongs.cryptomonitor.di.module.ViewModelModule
 import com.countlesswrongs.cryptomonitor.di.scope.ApplicationScope
+import com.countlesswrongs.cryptomonitor.presentation.CoinApp
 import com.countlesswrongs.cryptomonitor.presentation.CoinDetailFragment
 import com.countlesswrongs.cryptomonitor.presentation.CoinPriceListActivity
 import dagger.BindsInstance
@@ -16,6 +17,8 @@ interface ApplicationComponent {
     fun inject(activity: CoinPriceListActivity)
 
     fun inject(fragment: CoinDetailFragment)
+
+    fun inject(application: CoinApp)
 
     @Component.Factory
     interface Factory {
